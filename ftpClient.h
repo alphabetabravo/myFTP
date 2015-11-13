@@ -19,6 +19,12 @@
 #define TRUE 1
 #define FALSE 0
 
+#define FTP_CLIENT_DEFAULT_TIMEOUT   20000
+#define FTP_CLIENT_SOCKET_MIN_TX_BUFFER_SIZE   1430
+#define FTP_CLIENT_SOCKET_MIN_RX_BUFFER_SIZE   1430
+
+
+
 
 typedef struct ctxClient{
 	IpAddr serverAddress;
