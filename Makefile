@@ -1,18 +1,18 @@
 ################################################################################
 # File Name       : Makefile                                                   #
-# Created By      : MOLLARD Rémi                                               #
-# Creation Date   : Octobre    1 , 2015                                        #
-# Last Changed By : MOLLARD Rémi                                               #
+# Created By      :                                                #
+# Creation Date   :                                         #
+# Last Changed By :                                                #
 # Last Changed    : Octobre 20 , 2015 :   19h00                                #
-# Purpose         : Fichier Makefile pour le Gimly_Bot                         #
+# Purpose         : Fichier Makefile pour le client FTP                         #
 #                  - all   : Compile all source pour le serveur                #
 #                  - clean : Clean all objects and executable                  #
 #                                                                              #
 ################################################################################
-EXECUTABLE=GimlyServer
-SRCS=GimlyServer.cpp serverssl.cpp structureServer.cpp tools.cpp
+EXECUTABLE=ftpClient
+SRCS=ftpClient.c
 CFLAGS= -W -ansi -Wall -pedantic
-LDFLAGS= -lssl -lcrypto -lpthread
+LDFLAGS=
 INCLUDES=
 CC=g++
 OBJECTS=$(SRCS:.cpp=.o)
@@ -22,4 +22,4 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $(SRCS)
 
 clean:
-	rm -f GimlyServer *.o
+	rm -f ftpClient *.o
