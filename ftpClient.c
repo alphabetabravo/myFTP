@@ -64,9 +64,6 @@ void printHelp(void){
 	printf("------------------------------------------------------------\n");
 }
 
-//int ftpReceiveCommand(ctxClient* contextClient, const char * command){
-	//recv(client->controleSock, buffer, sizeof(buffer), 0);
-//}
 int ftpSendCommand(ctxClient* contextClient, const char * command){
 	char* commandAndFinish = (char*)malloc(sizeof(char)*(strlen(command)+3));  
 	commandAndFinish[strlen(command)] = '\r';
