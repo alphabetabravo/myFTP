@@ -1,5 +1,15 @@
 #include "ftpClient.h"
 
+int cptArg(char * cmd)
+{
+	int i;
+	i=0;
+	while(str(cmd, " ")!= NULL){
+		i++;
+	}
+	return i;
+}
+
 int makeClientSocket(const char *hostname, int port){
     int sock;
     struct hostent *host;
