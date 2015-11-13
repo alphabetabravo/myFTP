@@ -11,8 +11,21 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
-/*
-typedef struct thClient{
+#include <sys/types.h>
+#include <sys/socket.h>
 
-}struct_thclsig;
-*/
+
+#define MAXBUFFER 2048
+
+typedef struct ctxClient{
+	IpAddr serverAddress;
+	int	passivMode;
+	Socket *controleSock;
+	Socket *dataSock;
+	char buffer[MAXBUFFER];
+}struct_ctxClient;
+
+int ftpConnect(ctxClient* contextClient, IpAddr Server, int serverPort);
+int ftpLogin(ctxClient* contextClient, const char * username, const char * password);
+int ftpSetPort(ctxClient* contextClient, IpAddr * ipaddrServer, int port);
+int ftpSendCommand(ctxClient* contextClient, const * char command, int * replycode);
