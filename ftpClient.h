@@ -13,19 +13,29 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-
+#include <errno.h>
+#include <malloc.h>
+#ifdef __unix__
+#   include <unistd.h>
+#   include <sys/socket.h>
+#   include <netdb.h>
+#   define SOCKLEN_T socklen_t
+#   define CLOSESOCKET close
+#endif
+#define h_addr h_addr_list[0]
 
 #define MAXBUFFER 2048
 
-typedef struct ctxClient{
-	IpAddr serverAddress;
+typedef struct {
+	char * serverAddress;
 	int	passivMode;
-	Socket *controleSock;
-	Socket *dataSock;
+	int controleSock;
+	int dataSock;
 	char buffer[MAXBUFFER];
-}struct_ctxClient;
+}ctxClient;
 
-int ftpConnect(ctxClient* contextClient, IpAddr Server, int serverPort);
+
+int ftpConnect(ctxClient* contextClient, const char * Server, int serverPort);
 int ftpLogin(ctxClient* contextClient, const char * username, const char * password);
-int ftpSetPort(ctxClient* contextClient, IpAddr * ipaddrServer, int port);
-int ftpSendCommand(ctxClient* contextClient, const * char command, int * replycode);
+int ftpSetPort(ctxClient* contextClient, const char * ipaddrServer, int port);
+int ftpSendCommand(ctxClient* contextClient, const char * command, int replycode);
