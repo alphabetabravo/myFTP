@@ -11,15 +11,15 @@
 ################################################################################
 EXECUTABLE=ftpClient
 SRCS=ftpClient.c
-CFLAGS= -W -ansi -Wall -pedantic
+CFLAGS= -W -ansi -Wall -pedantic -std=c99
 LDFLAGS=
 INCLUDES=
-CC=g++
-OBJECTS=$(SRCS:.cpp=.o)
-all:  $(EXECUTABLE)
+CC=gcc
+OBJECTS=$(SRCS:.c=.o)
+all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $(SRCS)
+	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $(OBJECTS)
 
 clean:
-	rm -f ftpClient *.o
+	rm $(OBJECTS) $(EXECUTABLE)
