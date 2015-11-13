@@ -115,31 +115,31 @@ int main(int argc, char *argv[]){
 				}
 			}
 			else if(strcmp(cmd,"close\n\0")==0){
-				printf("cd : Work in progress\n");
+				ftpSendCommand(client,"close");
 			}
 			else if(strcmp(cmd,"cd\n\0")==0){
-				printf("cd : Work in progress\n");
+				ftpSendCommand(client,"cd");
 			}
 			else if(strcmp(cmd,"pwd\n\0")==0){
-				printf("pwd : Work in progress\n");
+				ftpSendCommand(client,"pwd");
 			}
 			else if(strcmp(cmd,"get\n\0")==0){
-				printf("get : Work in progress\n");
+				ftpSendCommand(client,"get");
 			}
 			else if(strcmp(cmd,"put\n\0")==0){
-				printf("put : Work in progress\n");
+				ftpSendCommand(client,"put");
 			}
 			else if(strcmp(cmd,"del\n\0")==0){
-				printf("del : Work in progress\n");
+				ftpSendCommand(client,"del");
 			}
 			else if(strcmp(cmd,"mkd\n\0")==0){
-				printf("mkd : Work in progress\n");
+				ftpSendCommand(client,"mkd");
 			}
 			else if(strcmp(cmd,"rmd\n\0")==0){
-				printf("rmd : Work in progress\n");
+				ftpSendCommand(client,"rmd");
 			}
 			else if(strcmp(cmd,"dir\n\0")==0){
-				printf("dir : Work in progress\n");
+				ftpSendCommand(client,"dir");
 			}
 			else if(strcmp(cmd,"help\n\0")==0){
 				printHelp();
