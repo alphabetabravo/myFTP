@@ -47,4 +47,5 @@ typedef struct {
 int ftpConnect(ctxClient* contextClient, const char * Server, int serverPort);
 int ftpLogin(ctxClient* contextClient, const char * username, const char * password);
 int ftpSetPort(ctxClient* contextClient, const char * ipaddrServer, int port);
-int ftpSendCommand(ctxClient* contextClient, const char * command, int replycode);
+int ftpSendCommand(ctxClient* contextClient, const char * command);
+int ftpReceiveCommand(ctxClient* contextClient);

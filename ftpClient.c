@@ -36,7 +36,6 @@ int ftpConnect(ctxClient* contextClient, const char * ipServer, int serverPort)
 	  
 		contextClient->controleSock = makeClientSocket(contextClient->serverAddress ,serverPort);
 
-
 	return 0;
 }
 
@@ -65,6 +64,25 @@ void printHelp(void){
 	printf("------------------------------------------------------------\n");
 }
 
+//int ftpReceiveCommand(ctxClient* contextClient, const char * command){
+	//recv(client->controleSock, buffer, sizeof(buffer), 0);
+//}
+int ftpSendCommand(ctxClient* contextClient, const char * command){
+	char* commandAndFinish = (char*)malloc(sizeof(char)*(strlen(command)+3));  
+	commandAndFinish[strlen(command)] = '\r';
+	commandAndFinish[strlen(command)+1] = '\n';
+	commandAndFinish[strlen(command)+2] = '\0';
+	send(contextClient->controleSock,commandAndFinish,sizeof(commandAndFinish),0);
+	free(commandAndFinish);
+	return 0;
+}
+int ftpReceiveCommand(ctxClient* contextClient){
+	char buffer[MAXBUFFER];
+	memset(buffer, 0, MAXBUFFER);
+	recv(contextClient->controleSock, buffer, sizeof(buffer), 0);
+	printf("%s", buffer);
+	return 0;
+}
 int main(int argc, char *argv[]){
 		
 		int mySock=0;
@@ -92,6 +110,10 @@ int main(int argc, char *argv[]){
 				else{
 					printf("OK connect to server !\n");
 					mySock = ftpConnect(client,"127.0.0.1", 21);
+					connecte=1;
+					ftpReceiveCommand(client);
+					ftpSendCommand(client,"PASV");
+					ftpReceiveCommand(client);
 
 				}
 			}
