@@ -36,6 +36,7 @@ int ftpConnect(ctxClient* contextClient, const char * ipServer, int serverPort)
 	  
 		contextClient->controleSock = makeClientSocket(contextClient->serverAddress ,serverPort);
 
+
 	return 0;
 }
 
@@ -90,7 +91,8 @@ int main(int argc, char *argv[]){
 				}
 				else{
 					printf("OK connect to server !\n");
-					mySock = ftpConnect(client,"90.130.70.73", 21);
+					mySock = ftpConnect(client,"127.0.0.1", 21);
+
 				}
 			}
 			else if(strcmp(cmd,"close\n\0")==0){
