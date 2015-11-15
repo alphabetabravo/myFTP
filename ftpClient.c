@@ -33,18 +33,14 @@ int makeClientSocket(const char *hostname, int port){
 
 int ftpConnect(ctxClient* contextClient, const char * ipServer, int serverPort)
 {	
-
-	 if(contextClient == NULL)
-	 {
-          return -1;
-	  }
-	  memset(contextClient, 0, sizeof(ctxClient));
-	  
-	  contextClient->serverAddress = (char*)realloc(contextClient->serverAddress,strlen(ipServer)*sizeof(char));
-	  
-	  strcpy(contextClient->serverAddress,ipServer);
-	  
-		contextClient->controleSock = makeClientSocket(contextClient->serverAddress ,serverPort);
+	if(contextClient == NULL)
+	{
+		return -1;
+	}
+	memset(contextClient, 0, sizeof(ctxClient));
+	contextClient->serverAddress = (char*)realloc(contextClient->serverAddress,strlen(ipServer)*sizeof(char));
+	strcpy(contextClient->serverAddress,ipServer);
+	contextClient->controleSock = makeClientSocket(contextClient->serverAddress ,serverPort);
 
 	return 0;
 }
@@ -92,8 +88,8 @@ int ftpReceiveCommand(ctxClient* contextClient){
 }
 int main(int argc, char *argv[]){
 		
-		int mySock=0;
-		char cmd[1024], *param;
+		int mySock;
+		char cmd[1024], *param, par[3], *cp;
 		int connecte = 0;
 		ctxClient* client = (ctxClient*)malloc(1*sizeof(ctxClient));
 		client->serverAddress = (char*)malloc(1*sizeof(char));
@@ -105,10 +101,12 @@ int main(int argc, char *argv[]){
 			fgets(cmd, sizeof(cmd), stdin);		
 			param = strchr(cmd,' ');
 			
-			if (param) {
-					*param=0;
-						param++;
-				}
+				if (param) {
+					cp = strdupa (param);
+					par[0] = strtok (cp, ' ');
+					par[1] = strtok (cp, ' ');
+					printf("Par 1 : %s Par 2 %s", par[0], par[1]);
+					}
 
 			if(strcmp(cmd,"open\n\0")==0){
 				if(connecte){
@@ -121,7 +119,6 @@ int main(int argc, char *argv[]){
 					ftpReceiveCommand(client);
 					ftpSendCommand(client,"PASV");
 					ftpReceiveCommand(client);
-
 				}
 			}
 			else if(strcmp(cmd,"close\n\0")==0){
