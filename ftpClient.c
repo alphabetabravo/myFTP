@@ -4,7 +4,7 @@ int cptArg(char * cmd)
 {
 	int i;
 	i=0;
-	while(str(cmd, " ")!= NULL){
+	while(strcmp(cmd, " ") != 0){
 		i++;
 	}
 	return i;
@@ -89,7 +89,8 @@ int ftpReceiveCommand(ctxClient* contextClient){
 int main(int argc, char *argv[]){
 		
 		int mySock;
-		char cmd[1024], *param, par[3], *cp;
+		char cmd[1024], *param,  *cp;
+		char *par[3];
 		int connecte = 0;
 		ctxClient* client = (ctxClient*)malloc(1*sizeof(ctxClient));
 		client->serverAddress = (char*)malloc(1*sizeof(char));
@@ -102,9 +103,9 @@ int main(int argc, char *argv[]){
 			param = strchr(cmd,' ');
 			
 				if (param) {
-					cp = strdupa (param);
-					par[0] = strtok (cp, ' ');
-					par[1] = strtok (cp, ' ');
+					strcpy(cp,param);
+					par[0] = strtok (cp, " ");
+					par[1] = strtok (cp, " ");
 					printf("Par 1 : %s Par 2 %s", par[0], par[1]);
 					}
 
